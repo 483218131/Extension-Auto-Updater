@@ -6,7 +6,8 @@
     "releaseExtensions": [
         {
             "path": "E:\\Your\\Path\\To\\Release-Extension-1",
-            "repo": "author/repo-name"
+            "repo": "author/repo-name",
+            "key": "... (选填：填入提取的公钥以永久固定扩展ID)"
         }
     ]
 }
