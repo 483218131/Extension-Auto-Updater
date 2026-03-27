@@ -1,6 +1,7 @@
 # 🚀 Extension Auto Updater
 
-![演示截图](assets/demo.png)
+![演示截图1](assets/demo1.png)
+![演示截图2](assets/demo2.png)
 
 一个轻量级、零依赖的 Windows PowerShell 工具箱，用于一键自动化更新本地加载的浏览器扩展（Chrome / Edge）。
 
