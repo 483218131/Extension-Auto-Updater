@@ -6,12 +6,19 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 [System.Console]::CursorVisible = $true
 # =============================================
 
+# ========== 0. 运行日志（Transcript 落盘，便于事后核对每次更新内容） ==========
+$LogDir = Join-Path -Path $PSScriptRoot -ChildPath "logs"
+New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
+Start-Transcript -Path (Join-Path $LogDir ("update_" + (Get-Date -Format "yyyyMM") + ".log")) -Append | Out-Null
+# =============================================
+
 # ========== 1. 读取配置文件 ==========
 $scriptPath = $PSScriptRoot
 $configFile = Join-Path -Path $scriptPath -ChildPath "config.json"
 
 if (!(Test-Path $configFile)) {
     Write-Host "❌ 错误: 找不到配置文件 config.json！请确保它和脚本在同一个文件夹下。" -ForegroundColor Red
+    Stop-Transcript | Out-Null
     Exit # ⚠️ 删除了 Pause，防止后台卡死
 }
 
@@ -107,6 +114,7 @@ if ($null -ne $releaseExtensions) {
 # ========== FINISH ==========
 Write-Host "`n=== 所有任务执行完毕 ===" -ForegroundColor Green
 Write-Host "请在 edge://extensions/ 或 chrome://extensions/ 中重新加载扩展" -ForegroundColor White
+Stop-Transcript | Out-Null
 
 # ✨ 智能判断：精准检测是否为计划任务的隐藏模式触发
 $cmdLine = (Get-CimInstance Win32_Process -Filter "ProcessId=$PID").CommandLine

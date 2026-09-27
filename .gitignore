@@ -6,3 +6,5 @@ config.json
 
 # 忽略本地生成的浏览器扩展私钥
 *.pem
+# 运行日志（Transcript）
+logs/
